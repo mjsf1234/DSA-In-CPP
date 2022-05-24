@@ -155,15 +155,8 @@ int height(BinaryTreeNode<int> *root)
     {
         return 0;
     }
-    int maxheight;
-    if (height(root->left) < height(root->right))
-    {
-        return height(root->right) + 1;
-    }
-    else
-    {
-        return height(root->left) + 1;
-    }
+
+    return max(height(root->left), height(root->right)) + 1;
 }
 // 1 2 3 4 5 6 7 - 1 - 1 - 1 - 1 - 1 - 1 - 1 - 1
 int main()
