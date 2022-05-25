@@ -157,17 +157,62 @@ int height(BinaryTreeNode<int> *root)
     }
 
     return max(height(root->left), height(root->right)) + 1;
+};
+// TODO : mirror the element
+void mirrorBinaryTree(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    mirrorBinaryTree(root->left);
+    mirrorBinaryTree(root->right);
+    BinaryTreeNode<int> *temp = root->left;
+    root->left = root->right;
+    root->right = temp;
+};
+
+// TODO : preorder Binary tree
+
+void preOrder(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    cout << root->data << " ";
+    preOrder(root->left);
+    preOrder(root->right);
 }
+
+// TODO : postOrder
+
+void postOrder(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    postOrder(root->left);
+    postOrder(root->right);
+    cout << root->data << " ";
+}
+
 // 1 2 3 4 5 6 7 - 1 - 1 - 1 - 1 - 1 - 1 - 1 - 1
 int main()
 {
     // BinaryTreeNode<int> *root = takeInput();
     BinaryTreeNode<int> *root = TakeInputLevelWise();
-    printLevelWise(root);
     // cout << "node:" << numNode(root) << endl;
     // bool c = isNodePresent(root, 1);
     // cout << "C " << c;
-    cout << "H" << height(root);
+    // cout << "H" << height(root);
+    // mirrorBinaryTree(root);
+    printLevelWise(root);
+    cout << "------------------" << endl;
+    preOrder(root);
+    cout << endl;
+    postOrder(root);
 
     return 0;
 }
