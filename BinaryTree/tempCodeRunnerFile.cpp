@@ -1,1 +1,9 @@
-1 2 3 4 5 6 7 - 1 - 1 - 1 - 1 - 1 - 1 - 1 - 1
+int height(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+
+    return max(height(root->left), height(root->right)) + 1;
+};

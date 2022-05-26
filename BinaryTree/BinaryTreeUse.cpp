@@ -3,6 +3,7 @@ using namespace std;
 #include "BinaryTreeNode.h"
 #include <algorithm>
 #include <queue>
+#include <cstdlib>
 
 // TODO : Print function
 
@@ -197,6 +198,31 @@ void postOrder(BinaryTreeNode<int> *root)
     postOrder(root->right);
     cout << root->data << " ";
 }
+// TODO : find the sum of the node
+int getSum(BinaryTreeNode<int> *root)
+{
+
+    if (root == NULL)
+    {
+        return 0;
+    }
+    return root->data + getSum(root->left) + getSum(root->right);
+}
+// TODO : check tree is balanced
+
+bool isBalanced(BinaryTreeNode<int> *root)
+{
+    int left = height(root->left);
+    int right = height(root->right);
+    if ((std::abs(left - right)) <= 1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 // 1 2 3 4 5 6 7 - 1 - 1 - 1 - 1 - 1 - 1 - 1 - 1
 int main()
@@ -209,10 +235,12 @@ int main()
     // cout << "H" << height(root);
     // mirrorBinaryTree(root);
     printLevelWise(root);
-    cout << "------------------" << endl;
-    preOrder(root);
-    cout << endl;
-    postOrder(root);
+    // cout << "------------------" << endl;
+    // preOrder(root);
+    // cout << endl;
+    // postOrder(root);
+    // cout << "sum" << getSum(root) << endl;
+    cout << "balanced" << isBalanced(root);
 
     return 0;
 }
