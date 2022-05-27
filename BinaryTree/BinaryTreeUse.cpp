@@ -235,12 +235,12 @@ int main()
     // cout << "H" << height(root);
     // mirrorBinaryTree(root);
     printLevelWise(root);
-    // cout << "------------------" << endl;
-    // preOrder(root);
-    // cout << endl;
-    // postOrder(root);
+    cout << "------------------" << endl;
+    preOrder(root);
+    cout << endl;
+    postOrder(root);
     // cout << "sum" << getSum(root) << endl;
-    cout << "balanced" << isBalanced(root);
+    // cout << "balanced" << isBalanced(root);
 
     return 0;
 }
