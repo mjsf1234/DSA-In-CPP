@@ -87,6 +87,17 @@ void elementsInRangeK1K2(BinaryTreeNode<int> *root, int k1, int k2)
     {
         elementsInRangeK1K2(root->left, k1, k2);
     }
+};
+
+// TODO : check if tree is binary or not
+bool isBST(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    isBST(root->left);
+    isBST(root->right);
 }
 // 5 3 7 2 4 6 8 -1 -1 -1 -1 -1 -1 -1 -1
 int main()
