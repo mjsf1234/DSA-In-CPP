@@ -99,6 +99,10 @@ bool isBST(BinaryTreeNode<int> *root)
     isBST(root->left);
     isBST(root->right);
 }
+
+// TODO : Diameter of tree
+// TODO : preorder and inorder
+
 // 5 3 7 2 4 6 8 -1 -1 -1 -1 -1 -1 -1 -1
 int main()
 {
