@@ -42,6 +42,40 @@ BinaryTreeNode<int> *TakeInputLevelWise()
     return root;
 };
 
+// TODO : print the element in levelwise
+void printLevelWise(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    queue<BinaryTreeNode<int> *> q;
+    q.push(root);
+    while (q.size() != 0)
+    {
+        int count = q.size();
+        while (count != 0)
+        {
+
+            BinaryTreeNode<int> *front = q.front();
+            q.pop();
+            cout << front->data << " ";
+            if (front->left != NULL)
+            {
+
+                q.push(front->left);
+            }
+            if (front->right != NULL)
+            {
+
+                q.push(front->right);
+            }
+            count--;
+        }
+        cout << endl;
+    }
+}
+
 // TODO : to find the the element in the tree
 
 bool searchInBST(BinaryTreeNode<int> *root, int k)
@@ -90,14 +124,30 @@ void elementsInRangeK1K2(BinaryTreeNode<int> *root, int k1, int k2)
 };
 
 // TODO : check if tree is binary or not
-bool isBST(BinaryTreeNode<int> *root)
+// bool isBST(BinaryTreeNode<int> *root)
+// {
+//     if (root == NULL)
+//     {
+//         return;
+//     }
+//     isBST(root->left);
+//     isBST(root->right);
+// }
+
+// TODO : remove the leaf node
+BinaryTreeNode<int> *removeLeafNodes(BinaryTreeNode<int> *root)
 {
     if (root == NULL)
     {
-        return;
+        return NULL;
     }
-    isBST(root->left);
-    isBST(root->right);
+    if (root->left == NULL && root->right == NULL)
+    {
+        return NULL;
+    }
+    root->left = removeLeafNodes(root->left);
+    root->right = removeLeafNodes(root->right);
+    return root;
 }
 
 // TODO : Diameter of tree
@@ -107,9 +157,12 @@ bool isBST(BinaryTreeNode<int> *root)
 int main()
 {
     BinaryTreeNode<int> *root = TakeInputLevelWise();
-    cout << " " << searchInBST(root, 4);
-    cout << endl;
-    elementsInRangeK1K2(root, 14, 17);
+    // cout << " " << searchInBST(root, 4);
+    // cout << endl;
+    // elementsInRangeK1K2(root, 14, 17);
+    printLevelWise(root);
+    cout << "_______" << endl;
 
+    printLevelWise(removeLeafNodes(root));
     return 0;
 }
