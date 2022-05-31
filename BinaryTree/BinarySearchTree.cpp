@@ -3,6 +3,19 @@ using namespace std;
 #include <queue>
 #include "BinaryTreeNode.h"
 
+template <typename T>
+class Node
+{
+public:
+    T data;
+    Node<T> *next;
+    Node(T data)
+    {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+
 // TODO : take input levelwise
 BinaryTreeNode<int> *TakeInputLevelWise()
 {
@@ -153,6 +166,68 @@ BinaryTreeNode<int> *removeLeafNodes(BinaryTreeNode<int> *root)
 // TODO : Diameter of tree
 // TODO : preorder and inorder
 
+// TODO : Lavel wise linked list
+vector<Node<int> *> constructLinkedListForEachLevel(BinaryTreeNode<int> *root)
+{
+
+    vector<Node<int> *> v;
+    if (root == NULL)
+    {
+        v.push_back(NULL);
+        return v;
+    }
+
+    queue<BinaryTreeNode<int> *> q;
+    q.push(root);
+    while (q.size() != 0)
+    {
+        int count = q.size();
+        Node<int> *head = NULL;
+        Node<int> *tail = NULL;
+        while (count > 0)
+        {
+            BinaryTreeNode<int> *front = q.front();
+            q.pop();
+            Node<int> *node = new Node<int>(front->data);
+            if (head == NULL)
+            {
+                head = node;
+                tail = node;
+            }
+            else
+            {
+                tail->next = node;
+                tail = node;
+            }
+            if (front->left != NULL)
+            {
+
+                q.push(front->left);
+            }
+            if (front->right != NULL)
+            {
+
+                q.push(front->right);
+            }
+            count--;
+        }
+        v.push_back(head);
+    }
+    return v;
+}
+
+// TODO : to print the above Linked List
+void print(Node<int> *head)
+{
+    Node<int> *temp = head;
+    while (temp != NULL)
+    {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
 // 5 3 7 2 4 6 8 -1 -1 -1 -1 -1 -1 -1 -1
 int main()
 {
@@ -163,6 +238,12 @@ int main()
     printLevelWise(root);
     cout << "_______" << endl;
 
-    printLevelWise(removeLeafNodes(root));
+    // printLevelWise(removeLeafNodes(root));
+    vector<Node<int> *> ans = constructLinkedListForEachLevel(root);
+    for (int i = 0; i < ans.size(); i++)
+    {
+        print(ans[i]);
+    }
+
     return 0;
 }
