@@ -228,6 +228,27 @@ void print(Node<int> *head)
     cout << endl;
 }
 
+pair<int, int> getHeightDiameter(BinaryTreeNode<int> *root)
+{
+    pair<int, int> pair;
+    if (root == NULL)
+    {
+        pair.first = 0;
+        pair.second = 0;
+        return pair;
+    }
+
+    int lh = getHeightDiameter(root->left).first;
+    int ld = getHeightDiameter(root->left).second;
+    int rh = getHeightDiameter(root->right).first;
+    int rd = getHeightDiameter(root->right).second;
+    int Height = max(lh, rh);
+    int diameter = max((lh + rh), max(ld, rd));
+    pair.first = Height + 1;
+    pair.second = diameter;
+    return pair;
+}
+
 // 5 3 7 2 4 6 8 -1 -1 -1 -1 -1 -1 -1 -1
 int main()
 {
@@ -237,13 +258,17 @@ int main()
     // elementsInRangeK1K2(root, 14, 17);
     printLevelWise(root);
     cout << "_______" << endl;
+    pair<int, int> p = getHeightDiameter(root);
+    cout << "Height"
+         << ":" << p.first << " "
+         << "diameter : " << p.second << endl;
 
     // printLevelWise(removeLeafNodes(root));
-    vector<Node<int> *> ans = constructLinkedListForEachLevel(root);
-    for (int i = 0; i < ans.size(); i++)
-    {
-        print(ans[i]);
-    }
+    // vector<Node<int> *> ans = constructLinkedListForEachLevel(root);
+    // for (int i = 0; i < ans.size(); i++)
+    // {
+    //     print(ans[i]);
+    // }
 
     return 0;
 }
