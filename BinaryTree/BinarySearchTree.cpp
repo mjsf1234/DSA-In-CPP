@@ -137,138 +137,42 @@ void elementsInRangeK1K2(BinaryTreeNode<int> *root, int k1, int k2)
 };
 
 // TODO : check if tree is binary or not
-// bool isBST(BinaryTreeNode<int> *root)
-// {
-//     if (root == NULL)
-//     {
-//         return;
-//     }
-//     isBST(root->left);
-//     isBST(root->right);
-// }
-
-// TODO : remove the leaf node
-BinaryTreeNode<int> *removeLeafNodes(BinaryTreeNode<int> *root)
+int maximum(BinaryTreeNode<int> *root)
 {
     if (root == NULL)
     {
-        return NULL;
+        return INT32_MIN;
     }
-    if (root->left == NULL && root->right == NULL)
-    {
-        return NULL;
-    }
-    root->left = removeLeafNodes(root->left);
-    root->right = removeLeafNodes(root->right);
-    return root;
+    return max((root->data), (max(maximum(root->left), maximum(root->right))));
 }
 
-// TODO : Diameter of tree
-// TODO : preorder and inorder
-
-// TODO : Lavel wise linked list
-vector<Node<int> *> constructLinkedListForEachLevel(BinaryTreeNode<int> *root)
+int minimum(BinaryTreeNode<int> *root)
 {
-
-    vector<Node<int> *> v;
     if (root == NULL)
     {
-        v.push_back(NULL);
-        return v;
+        return INT32_MAX;
     }
-
-    queue<BinaryTreeNode<int> *> q;
-    q.push(root);
-    while (q.size() != 0)
-    {
-        int count = q.size();
-        Node<int> *head = NULL;
-        Node<int> *tail = NULL;
-        while (count > 0)
-        {
-            BinaryTreeNode<int> *front = q.front();
-            q.pop();
-            Node<int> *node = new Node<int>(front->data);
-            if (head == NULL)
-            {
-                head = node;
-                tail = node;
-            }
-            else
-            {
-                tail->next = node;
-                tail = node;
-            }
-            if (front->left != NULL)
-            {
-
-                q.push(front->left);
-            }
-            if (front->right != NULL)
-            {
-
-                q.push(front->right);
-            }
-            count--;
-        }
-        v.push_back(head);
-    }
-    return v;
+    return min((root->data), min(minimum(root->left), minimum(root->right)));
 }
 
-// TODO : to print the above Linked List
-void print(Node<int> *head)
+bool isBST(BinaryTreeNode<int> *root)
 {
-    Node<int> *temp = head;
-    while (temp != NULL)
-    {
-        cout << temp->data << " ";
-        temp = temp->next;
-    }
-    cout << endl;
-}
-
-pair<int, int> getHeightDiameter(BinaryTreeNode<int> *root)
-{
-    pair<int, int> pair;
     if (root == NULL)
     {
-        pair.first = 0;
-        pair.second = 0;
-        return pair;
+        return true;
     }
-
-    int lh = getHeightDiameter(root->left).first;
-    int ld = getHeightDiameter(root->left).second;
-    int rh = getHeightDiameter(root->right).first;
-    int rd = getHeightDiameter(root->right).second;
-    int Height = max(lh, rh);
-    int diameter = max((lh + rh), max(ld, rd));
-    pair.first = Height + 1;
-    pair.second = diameter;
-    return pair;
+    int leftMax = maximum(root->left);
+    int rightMin = minimum(root->right);
+    bool check = (root->data > leftMax) && (root->data <= rightMin) && isBST(root->left) && isBST(root->right);
+    return check;
 }
 
-// 5 3 7 2 4 6 8 -1 -1 -1 -1 -1 -1 -1 -1
 int main()
 {
     BinaryTreeNode<int> *root = TakeInputLevelWise();
-    // cout << " " << searchInBST(root, 4);
-    // cout << endl;
-    // elementsInRangeK1K2(root, 14, 17);
     printLevelWise(root);
     cout << "_______" << endl;
-    pair<int, int> p = getHeightDiameter(root);
-    cout << "Height"
-         << ":" << p.first << " "
-         << "diameter : " << p.second << endl;
-
-    // printLevelWise(removeLeafNodes(root));
-    // vector<Node<int> *> ans = constructLinkedListForEachLevel(root);
-    // for (int i = 0; i < ans.size(); i++)
-    // {
-    //     print(ans[i]);
-    // }
+    cout << isBST(root);
 
     return 0;
 }
