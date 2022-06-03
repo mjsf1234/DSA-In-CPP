@@ -1,42 +1,50 @@
 #include <iostream>
 using namespace std;
-#include <cmath>
-#include <cstdlib>
-
-// TODO : return the trancated value
-int divide(int dividend, int divisor)
+#include <vector>
+int searchInsert(vector<int> &nums, int target)
 {
-    int sign = 1;
-    if ((divisor < 0 && dividend > 0) || (divisor > 0 && dividend < 0))
+    int start = 0;
+    int end = nums.size() - 1;
+    while (start <= end)
     {
-        sign = -1;
-        // cout << sign << endl;
+        int mid = (start + end) / 2;
+        if (nums[mid] == target)
+        {
+            return mid;
+        }
+        if (nums[mid] < target)
+        {
+            start = mid + 1;
+        }
+        else
+        {
+            end = mid - 1;
+        }
     }
-    int quotient = 0;
-    dividend = std::abs(dividend);
-    divisor = std::abs(divisor);
-    cout << dividend << endl;
-    while (dividend >= divisor)
-    {
-        dividend -= divisor;
-        quotient++;
-    }
+    return start;
+}
 
-    cout << sign << endl;
-    int ans = sign * quotient;
-    if (ans > INT32_MAX)
+vector<int> takeInput()
+{
+    vector<int> v;
+    int n;
+    cout << "enter the size of array: " << endl;
+    cin >> n;
+    for (int i = 0; i < n; i++)
     {
-        return INT32_MAX;
+        int j;
+        cin >> j;
+        v.push_back(j);
     }
-    if (ans < INT32_MIN)
-    {
-        return INT32_MIN;
-    }
-    return ans;
+    return v;
 }
 
 int main()
 {
-    cout << divide(-2147483648, -1);
+    vector<int> v = takeInput();
+    cout << v.size() << endl;
+    int ans = searchInsert(v, 2);
+    cout << ans;
+
     return 0;
 }
