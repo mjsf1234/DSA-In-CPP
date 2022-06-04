@@ -27,6 +27,8 @@ private:
         }
     }
 
+    BinaryTreeNode<int> *insertHelper() {}
+
 public:
     BST()
     {
