@@ -28,6 +28,7 @@ private:
     }
 
     BinaryTreeNode<int> *insertHelper() {}
+    BinaryTreeNode<int> *deleteHelper() {}
 
 public:
     BST()
