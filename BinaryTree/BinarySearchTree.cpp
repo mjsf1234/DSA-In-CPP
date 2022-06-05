@@ -1,8 +1,8 @@
 #include <iostream>
 using namespace std;
 #include <queue>
-#include "BinaryTreeNode.h"
-
+// #include "BinaryTreeNode.h"
+#include "BinarySearchTreeClass.h"
 template <typename T>
 class Node
 {
@@ -356,9 +356,9 @@ vector<int> *getPath(BinaryTreeNode<int> *root, int data)
 
 int main()
 {
-    BinaryTreeNode<int> *root = TakeInputLevelWise();
-    printLevelWise(root);
-    cout << "_______" << endl;
+    // BinaryTreeNode<int> *root = TakeInputLevelWise();
+    // printLevelWise(root);
+    // cout << "_______" << endl;
     // // cout << isBST(root) << endl;
     // // cout << isBST2(root).isBST << endl;
     // cout << isBST3(root) << endl;
@@ -371,11 +371,23 @@ int main()
     //     cout << head->data << " ";
     //     head = head->next;
     // }
-    vector<int> *v = getPath(root, 8);
-    for (int i = 0; i < v->size(); i++)
-    {
-        cout << v->at(i) << " ";
-    }
-    delete v;
+    // vector<int> *v = getPath(root, 8);
+    // for (int i = 0; i < v->size(); i++)
+    // {
+    //     cout << v->at(i) << " ";
+    // }
+    // delete v;
+
+    BST b;
+    b.insert(4);
+    b.insert(6);
+    b.insert(5);
+    b.insert(2);
+    b.insert(1);
+    b.insert(3);
+    b.insert(7);
+    b.printTree();
+    cout << b.hasData(7) << endl;
+
     return 0;
 }
