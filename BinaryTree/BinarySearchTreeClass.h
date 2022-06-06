@@ -62,15 +62,49 @@ private:
         {
             return NULL;
         }
-        if (node->data == data && node->left == NULL && node->right == NULL)
+        else if (node->data > data)
         {
-            delete node;
-            return NULL;
+            node->left = deleteHelper(data, node->left);
+            return node;
         }
-        if (node->data == data)
+        else if (node->data < data)
         {
-            BinaryTreeNode<int> *tempLeft = node->left;
-            BinaryTreeNode<int> *tempRight = node->right;
+            node->right = deleteHelper(data, node->right);
+            return node;
+        }
+        else
+        {
+            if (node->left == NULL && node->right == NULL)
+            {
+                delete node;
+                return NULL;
+            }
+            if (node->left == NULL)
+            {
+                BinaryTreeNode<int> *temp = node->right;
+                node->right = NULL;
+                delete node;
+                return temp;
+            }
+            else if (node->right == NULL)
+            {
+                BinaryTreeNode<int> *temp = node->left;
+                node->left = NULL;
+                delete node;
+                return temp;
+            }
+            else
+            {
+                BinaryTreeNode<int> *minNode = node->right;
+                while (minNode->left != NULL)
+                {
+                    minNode = minNode->left;
+                }
+                int rightMin = minNode->data;
+                node->data = rightMin;
+                node->right = deleteHelper(rightMin, node->right);
+                return node;
+            }
         }
     }
 

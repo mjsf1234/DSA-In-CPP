@@ -386,8 +386,13 @@ int main()
     b.insert(1);
     b.insert(3);
     b.insert(7);
+    b.insert(8);
     b.printTree();
-    cout << b.hasData(7) << endl;
+    cout << b.hasData(6) << endl;
+    b.deleteData(6);
+    cout << "_____" << endl;
+    b.printTree();
+    cout << b.hasData(6) << endl;
 
     return 0;
 }
