@@ -108,6 +108,26 @@ private:
         }
     }
 
+    void printTreeHelper(BinaryTreeNode<int> *node)
+    {
+        if (node == NULL)
+        {
+            return;
+        }
+        cout << node->data << ":";
+        if (node->left != NULL)
+        {
+            cout << "L:" << node->left->data;
+        }
+        if (node->right != NULL)
+        {
+            cout << ",R:" << node->right->data;
+        }
+        cout << endl;
+        printTreeHelper(node->left);
+        printTreeHelper(node->right);
+    }
+
 public:
     BST()
     {
@@ -118,7 +138,7 @@ public:
     {
         delete root;
     }
-    bool hasData(int data)
+    bool search(int data)
     {
         return hasDataHelper(data, root);
     }
@@ -128,15 +148,13 @@ public:
         BinaryTreeNode<int> *tempRoot = insertHelper(root, data);
         this->root = tempRoot;
     }
-    void deleteData(int data)
+    void remove(int data)
     {
         this->root = deleteHelper(data, root);
     }
 
-    void printTree()
+    void print()
     {
-        preOrder(root);
+        printTreeHelper(root);
     }
 };
-
-;
