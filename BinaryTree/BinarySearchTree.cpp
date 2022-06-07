@@ -356,7 +356,7 @@ vector<int> *getPath(BinaryTreeNode<int> *root, int data)
 
 int main()
 {
-    // BinaryTreeNode<int> *root = TakeInputLevelWise();
+    BinaryTreeNode<int> *root = TakeInputLevelWise();
     // printLevelWise(root);
     // cout << "_______" << endl;
     // // cout << isBST(root) << endl;
