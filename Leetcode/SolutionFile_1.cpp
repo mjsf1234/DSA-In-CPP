@@ -62,15 +62,31 @@ BinaryTreeNode<int> *TakeInputLevelWise()
     return root;
 };
 
+// TODO : problem 2: depth of
+
+int maxDepth(BinaryTreeNode<int> *root)
+{
+    int height = 0;
+    if (root == NULL)
+    {
+        return 0;
+    }
+    int leftHeight = maxDepth(root->left);
+    int right = maxDepth(root->right);
+    height = max(leftHeight, right);
+    return 1 + height;
+}
+
 int main()
 {
     BinaryTreeNode<int> *root = TakeInputLevelWise();
-    vector<int> v = inorderTraversal(root);
-    cout << "dad" << v.size() << endl;
-    for (int i = 0; i < v.size(); i++)
-    {
-        cout << v[i] << " ";
-    }
+    // vector<int> v = inorderTraversal(root);
+    // cout << "dad" << v.size() << endl;
+    // for (int i = 0; i < v.size(); i++)
+    // {
+    //     cout << v[i] << " ";
+    // }
+    cout << maxDepth(root);
 
     return 0;
 }
