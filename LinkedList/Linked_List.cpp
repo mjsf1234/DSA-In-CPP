@@ -12,7 +12,7 @@ void print(Node *head)
     }
 };
 
-//!Creating the take user input function
+//! Creating the take user input function
 Node *takeInput()
 {
     Node *head = NULL;
@@ -40,21 +40,38 @@ Node *takeInput()
             temp->next = new Node(data);
 
             /**
-            *! using the tail method
-            * Node *newNode = new Node(data);
-            * tail->next = newNode;
-            *tail = newNode;*/
+             *! using the tail method
+             * Node *newNode = new Node(data);
+             * tail->next = newNode;
+             *tail = newNode;*/
         }
 
         cin >> data;
     }
 
     return head;
+};
+
+Node *reverseList(Node *head)
+{
+    Node *prev = NULL;
+    Node *current = head;
+    Node *next = NULL;
+    while (current != NULL)
+    {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    head = prev;
+    return head;
 }
+
 int main()
 {
 
-    /* 
+    /*
     !Statically creates object
     Node n1(10);
     Node n2(20);
@@ -79,6 +96,9 @@ int main()
 
     Node *head = takeInput();
     print(head);
+    cout << "__" << endl;
+    Node *head1 = reverseList(head);
+    print(head1);
 
     return 0;
 }

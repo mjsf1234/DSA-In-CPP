@@ -75,7 +75,7 @@ int maxDepth(BinaryTreeNode<int> *root)
     int right = maxDepth(root->right);
     height = max(leftHeight, right);
     return 1 + height;
-}
+};
 
 int main()
 {
