@@ -352,13 +352,51 @@ vector<int> *getPath(BinaryTreeNode<int> *root, int data)
     {
         return NULL;
     }
+};
+
+void insertDuplicateNode(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+
+    insertDuplicateNode(root->left);
+    insertDuplicateNode(root->right);
+    BinaryTreeNode<int> *node = new BinaryTreeNode<int>(root->data);
+
+    BinaryTreeNode<int> *temp = root->left;
+    root->left = node;
+    node->left = temp;
+}
+
+// TODO : Pair sum Binary tree
+
+void searchNodeInTree(BinaryTreeNode<int> *root, int n)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    if (root->data == n)
+    {
+        cout << root->data;
+    }
+    searchNodeInTree(root->left, n);
+    searchNodeInTree(root->right, n);
+}
+
+void pairSum(BinaryTreeNode<int> *root, int sum)
+{
 }
 
 int main()
 {
     BinaryTreeNode<int> *root = TakeInputLevelWise();
-    // printLevelWise(root);
-    // cout << "_______" << endl;
+    printLevelWise(root);
+    cout << "_______" << endl;
+    insertDuplicateNode(root);
+    printLevelWise(root);
     // // cout << isBST(root) << endl;
     // // cout << isBST2(root).isBST << endl;
     // cout << isBST3(root) << endl;
@@ -378,21 +416,21 @@ int main()
     // }
     // delete v;
 
-    BST b;
-    b.insert(4);
-    b.insert(6);
-    b.insert(5);
-    b.insert(2);
-    b.insert(1);
-    b.insert(3);
-    b.insert(7);
-    b.insert(8);
-    b.print();
-    cout << b.search(6) << endl;
-    b.remove(6);
-    cout << "_____" << endl;
-    b.print();
-    cout << b.search(6) << endl;
+    // BST b;
+    // b.insert(4);
+    // b.insert(6);
+    // b.insert(5);
+    // b.insert(2);
+    // b.insert(1);
+    // b.insert(3);
+    // b.insert(7);
+    // b.insert(8);
+    // b.print();
+    // cout << b.search(6) << endl;
+    // b.remove(6);
+    // cout << "_____" << endl;
+    // b.print();
+    // cout << b.search(6) << endl;
 
     return 0;
 }
