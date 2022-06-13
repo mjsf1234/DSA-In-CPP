@@ -116,6 +116,10 @@ bool isSymmetric(BinaryTreeNode<int> *root)
     return ans->isTreeSymmetric;
 }
 
+bool isSymmteric(BinaryTreeNode<int> *root)
+{
+}
+
 int main()
 {
     BinaryTreeNode<int> *root = TakeInputLevelWise();
