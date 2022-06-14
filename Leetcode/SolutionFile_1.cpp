@@ -78,46 +78,22 @@ int maxDepth(BinaryTreeNode<int> *root)
 };
 
 // TODO find wheather tree is symmteric or not
-
-class HeightAndSymmteric
+bool isSymmetricHelper(BinaryTreeNode<int> *left, BinaryTreeNode<int> *right)
 {
-public:
-    int Height;
-    bool isTreeSymmetric;
-};
-HeightAndSymmteric *isSymmetricHelper(BinaryTreeNode<int> *root)
-{
-    HeightAndSymmteric *hs = new HeightAndSymmteric();
-    if (root == NULL)
-    {
-        hs->Height = 0;
-        hs->isTreeSymmetric = true;
-        return hs;
-    }
-    HeightAndSymmteric *left = isSymmetricHelper(root->left);
-    HeightAndSymmteric *right = isSymmetricHelper(root->right);
-    if ((left->Height == right->Height) && (left->isTreeSymmetric && right->isTreeSymmetric))
-    {
-        hs->isTreeSymmetric = true;
-    }
-    else
-    {
-        hs->isTreeSymmetric = false;
-    }
 
-    hs->Height = max(left->Height, right->Height) + 1;
-
-    return hs;
+    if (left == NULL || right == NULL)
+    {
+        return left == right;
+    }
+    else if (left->data != right->data)
+    {
+        return false;
+    }
+    return isSymmetricHelper(left->left, right->right) && isSymmetricHelper(left->right, right->left);
 }
-
 bool isSymmetric(BinaryTreeNode<int> *root)
 {
-    HeightAndSymmteric *ans = isSymmetricHelper(root);
-    return ans->isTreeSymmetric;
-}
-
-bool isSymmteric(BinaryTreeNode<int> *root)
-{
+    return (root == NULL || isSymmetricHelper(root->left, root->right));
 }
 
 int main()
