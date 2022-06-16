@@ -11,7 +11,6 @@ int main()
         string key = "abc";
         key = key + c;
         int value = i + 1;
-        // cout << key << " " << value << endl;
         map.insert(key, value);
     }
 

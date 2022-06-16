@@ -107,6 +107,7 @@ public:
         MapNode<V> *head = buckets[bucketIndex];
         while (head != NULL)
         {
+
             if (head->key == key)
             {
                 head->value = value;
@@ -121,7 +122,6 @@ public:
         buckets[bucketIndex] = node;
         count++;
         double loadFactor = (1.0 * count) / numBuckets;
-        cout << "load factor is " << loadFactor << endl;
         if (loadFactor > 0.7)
         {
             rehash();
