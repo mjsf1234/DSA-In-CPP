@@ -25,6 +25,52 @@ int highestFrequency(int arr[], int n)
     return ans;
 }
 
+// TODO : delete the repeating character in the string
+
+string uniqueChar(string str)
+{
+    unordered_map<char, int> map;
+    string ans = "";
+    for (int i = 0; i < str.length(); i++)
+    {
+        if (map.count(str[i]) > 0)
+        {
+            continue;
+        }
+
+        ans += str[i];
+        map[str[i]] = 1;
+    }
+    return ans;
+}
+
+void getPairsWithDifferenceK(int *arr, int n, int k)
+{
+    unordered_map<int, int> map;
+    for (int i = 0; i < n; i++)
+    {
+        int first = arr[i] + k;
+        int second = arr[i] - k;
+
+        unordered_map<int, int>::iterator it = map.find(first);
+        unordered_map<int, int>::iterator it1 = map.find(second);
+        if (it != map.end())
+        {
+            pair<int, int> p(arr[i], it->second);
+            cout << p.first << " " << p.second << endl;
+        }
+        else if (it1 != map.end())
+        {
+            pair<int, int> p(arr[i], it1->second);
+            cout << p.first << " " << p.second << endl;
+        }
+        else
+        {
+            map[arr[i]] = arr[i];
+        }
+    }
+}
+
 int main()
 {
     /* unordered_map<string, int> ourmap; // unordered_map(key datatype, values datatype)
@@ -53,9 +99,15 @@ int main()
      ourmap.erase("second");
      cout << "the size of the map is " << ourmap.size() << endl;*/
 
-    // higher frequency array;
+    /*higher frequency array;
     int arr[] = {1, 2, 2, 1};
-    cout << highestFrequency(arr, 4);
+    cout << highestFrequency(arr, 4);*/
+
+    /* string ans = uniqueChar("codingninjas");
+     cout << ans;*/
+
+    int ans[] = {4, 4, 4, 4};
+    getPairsWithDifferenceK(ans, 4, 0);
 
     return 0;
 }
