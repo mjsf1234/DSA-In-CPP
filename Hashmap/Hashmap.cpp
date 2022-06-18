@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 #include <unordered_map>
+#include <vector>
 
 int highestFrequency(int arr[], int n)
 {
@@ -69,6 +70,15 @@ void getPairsWithDifferenceK(int *arr, int n, int k)
             map[arr[i]] = arr[i];
         }
     }
+}
+
+vector<int> longestConsecutiveIncreasingSequence(int *arr, int n)
+{
+}
+
+int lengthOfLongestSubsetWithZeroSum(int *arr, int n)
+{
+    // Write your code here
 }
 
 int main()
