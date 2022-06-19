@@ -78,6 +78,10 @@ vector<int> longestConsecutiveIncreasingSequence(int *arr, int n)
 
 int lengthOfLongestSubsetWithZeroSum(int *arr, int n)
 {
+}
+
+int lengthOfLongestSubsetWithZeroSum(int *arr, int n)
+{
     // Write your code here
 }
 
