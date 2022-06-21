@@ -85,13 +85,52 @@ public:
             return false;
         }
     }
+    void removeWordHelper(TrieNode *root, string word)
+    {
+        if (word.size() == 0)
+        {
+            root->isTerminal = false;
+            return;
+        }
+
+        int index = word[0] - 'a';
+        TrieNode *child;
+        if (root->children[index] != NULL)
+        {
+            child = root->children[index];
+            removeWordHelper(child, word.substr(1));
+        }
+        else
+        {
+            return;
+        }
+        if (root->children[index]->isTerminal == false)
+        {
+            for (int i = 0; i < 26; i++)
+            {
+                if (root->children[i] != NULL)
+                {
+                    return;
+                }
+            }
+            delete child;
+            root->children[index] = NULL;
+        }
+    }
+    void removeWord(string word)
+    {
+        removeWordHelper(root, word);
+    }
 };
+
 int main()
 {
     Trie *test = new Trie();
     test->insertWord("are");
     test->insertWord("and");
-    cout << test->search("ar");
-
+    test->insertWord("dot");
+    cout << test->search("dot") << endl;
+    test->removeWord("dot");
+    cout << test->search("dot") << endl;
     return 0;
 }
