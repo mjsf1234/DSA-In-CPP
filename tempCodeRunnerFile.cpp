@@ -1,1 +1,2 @@
-this->next = NULL;
+
+        cout << trim(pattern, i, 3) << endl;
