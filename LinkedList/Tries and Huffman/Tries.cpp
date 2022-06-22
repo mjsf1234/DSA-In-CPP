@@ -181,9 +181,11 @@ public:
 
     vector<string> autoCompleteHelper(TrieNode *root, string pattern)
     {
+        vector<string> rootNode;
         if (pattern.size() == 0)
         {
-            vector<string> rootNode = getAllBelowNode(root);
+            rootNode = getAllBelowNode(root);
+            return rootNode;
         }
 
         int index = pattern[0] - 'a';
@@ -194,23 +196,39 @@ public:
         }
         else
         {
-            cout << "not found" << endl;
-            return;
+            vector<string> v;
+            return v;
         }
         vector<string> v = autoCompleteHelper(child, pattern.substr(1));
-        for (int i = 0; i < 26; i++)
+        if (root->isTerminal)
         {
+            string rootData;
+            rootData.push_back(root->data);
+            rootNode.push_back(rootData);
         }
+        for (int i = 0; i < v.size(); i++)
+        {
+            string rootData;
+            rootData.push_back(root->data);
+            string word = rootData + v[i];
+            rootNode.push_back(word);
+        }
+        return rootNode;
     }
 
     void autoComplete(vector<string> input, string pattern)
     {
-
+        // insert all the word into the tries
         for (int i = 0; i < input.size(); i++)
         {
             insertWord(input[i]);
         }
-        autoCompleteHelper(root, pattern);
+
+        vector<string> v = autoCompleteHelper(root, pattern);
+        for (int i = 0; i < v.size(); i++)
+        {
+            cout << v[i] << endl;
+        }
     }
 };
 
@@ -247,8 +265,9 @@ bool patternMatching(vector<string> vect, string pattern)
 int main()
 {
     Trie test;
+    vector<string> v = {"den", "no", "not", "notes", "none"};
+    test.autoComplete(v, "n");
 
-    /* vector<string> v = {"abc", "def", "ghi"};
-     cout << patternMatching(v, "ab");*/
+    /* cout << patternMatching(v, "ab");*/
     return 0;
 }
