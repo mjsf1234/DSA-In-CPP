@@ -305,6 +305,39 @@ void zigZagOrder(BinaryTreeNode<int> *root)
         cout << endl;
     }
 }
+
+// TODO : print the node without siblings
+void printNodesWithoutSibling(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    if (root->left == NULL)
+    {
+        if (root->left == root->right)
+        {
+            return;
+        }
+        else
+        {
+            cout << root->right->data << " ";
+        }
+    }
+    if (root->right == NULL)
+    {
+        if (root->left == root->right)
+        {
+            return;
+        }
+        else
+        {
+            cout << root->left->data;
+        }
+    }
+    printNodesWithoutSibling(root->left);
+    printNodesWithoutSibling(root->right);
+}
 // 5 3 7 2 4 6 8 -1 -1 -1 -1 -1 -1 -1 -1
 int main()
 {
@@ -331,6 +364,7 @@ int main()
     //     print(ans[i]);
     // }
 
-    zigZagOrder(root);
+    // zigZagOrder(root);
+    printNodesWithoutSibling(root);
     return 0;
 }
