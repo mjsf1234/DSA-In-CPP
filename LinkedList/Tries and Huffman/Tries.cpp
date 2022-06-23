@@ -159,8 +159,8 @@ public:
         vector<string> main;
         if (root->isTerminal)
         {
-            string t;
-            t.push_back(root->data);
+            string t = "";
+            t = t + root->data;
             main.push_back(t);
         }
         for (int i = 0; i < 26; i++)
@@ -200,12 +200,7 @@ public:
             return v;
         }
         vector<string> v = autoCompleteHelper(child, pattern.substr(1));
-        if (root->isTerminal)
-        {
-            string rootData;
-            rootData.push_back(root->data);
-            rootNode.push_back(rootData);
-        }
+
         for (int i = 0; i < v.size(); i++)
         {
             string rootData;
@@ -225,6 +220,7 @@ public:
         }
 
         vector<string> v = autoCompleteHelper(root, pattern);
+        cout << v.size() << endl;
         for (int i = 0; i < v.size(); i++)
         {
             cout << v[i] << endl;
@@ -265,9 +261,9 @@ bool patternMatching(vector<string> vect, string pattern)
 int main()
 {
     Trie test;
-    vector<string> v = {"den", "no", "not", "notes", "none"};
-    test.autoComplete(v, "n");
+    vector<string> v = {"do", "dont", "note", "den", "no", "not", "notes"};
+    test.autoComplete(v, "dend");
 
-    /* cout << patternMatching(v, "ab");*/
+    /* cout << patternMatchindg(v, "ab");*/
     return 0;
 }

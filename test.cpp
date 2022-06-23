@@ -4,8 +4,10 @@ using namespace std;
 
 int main()
 {
-    vector<string> v;
-    cout << v.size() << endl;
+    char c = 'l';
+    string s = "";
+    s = s + c;
+    cout << s.size() << " " < < < < endl;
 
     return 0;
 }

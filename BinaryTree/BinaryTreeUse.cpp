@@ -208,20 +208,42 @@ int getSum(BinaryTreeNode<int> *root)
     }
     return root->data + getSum(root->left) + getSum(root->right);
 }
-// TODO : check tree is balanced
 
-bool isBalanced(BinaryTreeNode<int> *root)
+// TODO : check if Bianry Tree is Balanced
+
+//! isBalanced helper function
+pair<int, bool> isBalancedHelper(BinaryTreeNode<int> *root)
 {
-    int left = height(root->left);
-    int right = height(root->right);
-    if ((std::abs(left - right)) <= 1)
+    // base case
+    pair<int, bool> heightIsBalancedResult;
+    if (root == NULL)
     {
-        return true;
+        heightIsBalancedResult.first = 0;
+        heightIsBalancedResult.second = true;
+        return heightIsBalancedResult;
+    }
+
+    int leftHeight = height(root->left);
+    int rightHeight = height(root->right);
+
+    heightIsBalancedResult.first = max(leftHeight, rightHeight) + 1;
+
+    //* if left height and right height difference <=1 and left tree is balanced and right tree is balanced
+    if (((std::abs(leftHeight - rightHeight)) <= 1) && isBalancedHelper(root->left).second && isBalancedHelper(root->right).second)
+    {
+        heightIsBalancedResult.second = true;
     }
     else
     {
-        return false;
+        heightIsBalancedResult.second = false;
     }
+    return heightIsBalancedResult;
+}
+
+//! main isBalanced function for user
+bool isBalanced(BinaryTreeNode<int> *root)
+{
+    return isBalancedHelper(root).second;
 }
 
 // 1 2 3 4 5 6 7 - 1 - 1 - 1 - 1 - 1 - 1 - 1 - 1
@@ -229,18 +251,18 @@ int main()
 {
     // BinaryTreeNode<int> *root = takeInput();
     BinaryTreeNode<int> *root = TakeInputLevelWise();
-    // cout << "node:" << numNode(root) << endl;
-    // bool c = isNodePresent(root, 1);
-    // cout << "C " << c;
-    // cout << "H" << height(root);
-    // mirrorBinaryTree(root);
+    /*cout << "node:" << numNode(root) << endl;
+    bool c = isNodePresent(root, 1);
+    cout << "C " << c;
+    cout << "H" << height(root);
+    mirrorBinaryTree(root);
     printLevelWise(root);
     cout << "------------------" << endl;
     preOrder(root);
     cout << endl;
     postOrder(root);
-    // cout << "sum" << getSum(root) << endl;
-    // cout << "balanced" << isBalanced(root);
+    cout << "sum" << getSum(root) << endl;
+    cout << "balanced " << isBalanced(root);*/
 
     return 0;
 }
