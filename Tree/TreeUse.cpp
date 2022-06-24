@@ -79,31 +79,30 @@ void printLevelWise(TreeNode<int> *root)
 TreeNode<int> *takeInputLevelWise()
 {
     int rootData;
-    cout << "enter the root data: " << endl;
     cin >> rootData;
     TreeNode<int> *root = new TreeNode<int>(rootData);
-    queue<TreeNode<int> *> q;
-    q.push(root);
 
-    while (q.size() != 0)
+    queue<TreeNode<int> *> pendingNodes;
+
+    pendingNodes.push(root);
+    while (pendingNodes.size() != 0)
     {
-        TreeNode<int> *front = q.front();
-        q.pop();
-        int childNum;
-        cout << "number of children of " << front->data << endl;
-        cin >> childNum;
-        for (int i = 0; i < childNum; i++)
+        TreeNode<int> *front = pendingNodes.front();
+        pendingNodes.pop();
+        int numChild;
+        cin >> numChild;
+        for (int i = 0; i < numChild; i++)
         {
             int childData;
-            cout << "enter the " << i << "th child of " << front->data << endl;
             cin >> childData;
-            TreeNode<int> *node = new TreeNode<int>(childData);
-            front->children.push_back(node);
-            q.push(node);
+            TreeNode<int> *child = new TreeNode<int>(childData);
+            front->children.push_back(child);
+            pendingNodes.push(child);
         }
     }
+
     return root;
-};
+}
 
 // TODO: take input from the users and return the address of the root
 
@@ -271,13 +270,13 @@ int getTheNodeSum(TreeNode<int> *root)
 
 TreeNode<int> *maxSumNode(TreeNode<int> *root)
 {
-    int max;
-    TreeNode<int> *Node;
+    int max = INT32_MIN;
+    TreeNode<int> *Node = NULL;
 
-    int temp = getTheNodeSum(root);
-    if (temp > max)
+    int rootSum = getTheNodeSum(root);
+    if (rootSum > max)
     {
-        max = temp;
+        max = rootSum;
         Node = root;
     }
     for (int i = 0; i < root->children.size(); i++)
@@ -289,6 +288,10 @@ TreeNode<int> *maxSumNode(TreeNode<int> *root)
             Node = root->children[i];
         }
     }
+    for (int i = 0; i < root->children.size(); i++)
+    {
+    }
+
     return Node;
 };
 
@@ -356,23 +359,24 @@ TreeNode<int> *getNextLargerElement(TreeNode<int> *root, int x)
 
 // TODO : find the second largest value in the generic tree
 
-TreeNode<int> *getSecondLargestNode(TreeNode<int> *root)
-{
-    TreeNode<int> *largest = NULL;
-    TreeNode<int> *secondLargest = NULL;
-    if (root != NULL)
-    {
-        largest = root;
-    }
-    for (int i = 0; i < root->children.size(); i++)
-    {
-        TreeNode<int> *temp = getSecondLargestNode(root->children[i]);
-        if (temp->data > largest->data)
-        {
-            largest = temp;
-        };
-    }
-}
+// TreeNode<int> *getSecondLargestNode(TreeNode<int> *root)
+// {
+//     TreeNode<int> *largest = NULL;
+//     TreeNode<int> *secondLargest = NULL;
+//     if (root != NULL)
+//     {
+//         largest = root;
+//     }
+//     for (int i = 0; i < root->children.size(); i++)
+//     {
+//         TreeNode<int> *temp = getSecondLargestNode(root->children[i]);
+//         if (temp->data > largest->data)
+//         {
+//             largest = temp;
+//         };
+//     }
+// }
+
 int main()
 {
     /* TreeNode<int> *root = new TreeNode<int>(1);
@@ -382,8 +386,8 @@ int main()
        root->children.push_back(node2);*/
 
     // TreeNode<int> *root = takeInput();
-    TreeNode<int> *root = takeInputLevelWise();
-    printLevelWise(root);
+    // TreeNode<int> *root = takeInputLevelWise();
+    // printLevelWise(root);
     // printTree(root);
     // cout << sumOfNodes(root);
     // cout << maxDataNode(root)->data << endl;
@@ -395,7 +399,14 @@ int main()
 
     // cout << "present " << isPresent(root, 8);
     // cout << getLargeNodeCount(root, 6);
-    cout << "answer" << maxSumNode(root)->data;
+    TreeNode<int> *root = takeInputLevelWise();
+
+    TreeNode<int> *ans = maxSumNode(root);
+
+    if (ans != NULL)
+    {
+        cout << ans->data;
+    }
     delete root;
 
     return 0;

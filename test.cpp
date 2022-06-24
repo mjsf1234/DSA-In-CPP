@@ -4,10 +4,8 @@ using namespace std;
 
 int main()
 {
-    char c = 'l';
-    string s = "";
-    s = s + c;
-    cout << s.size() << " " < < < < endl;
+    vector<int> children;
+    cout << children.size();
 
     return 0;
 }
