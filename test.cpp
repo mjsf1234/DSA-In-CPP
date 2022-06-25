@@ -1,11 +1,12 @@
 #include <iostream>
 using namespace std;
-#include <vector>
+#include <cmath>
 
 int main()
 {
-    vector<int> children;
-    cout << children.size();
-
+    int n = 3;
+    int i = 1;
+    int k = pow(i, 2);
+    cout << k;
     return 0;
 }
