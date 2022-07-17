@@ -290,7 +290,7 @@ TreeNode<int> *maxSumNode(TreeNode<int> *root)
     }
     for (int i = 0; i < root->children.size(); i++)
     {
-    }
+        }
 
     return Node;
 };

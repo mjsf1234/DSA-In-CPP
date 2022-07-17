@@ -154,16 +154,70 @@ int minCount(int n)
     return minCountHelper(n, ans, target);
 }
 
+// TODO: number of the balanced binary tree of height h (memoisation)
+
+//! helper code
+int balancedBTs(int n, int *arr)
+{
+
+    if (arr[n] != -1)
+    {
+        return arr[n];
+    }
+
+    if (n <= 1)
+    {
+        return 1;
+    }
+    int mod = pow(10, 9) + 7;
+    int h1 = balancedBTs(n - 1, arr) % mod;
+    int h2 = balancedBTs(n - 2, arr) % mod;
+    int temp1 = ((h1 % mod) * (long)(h1 % mod)) % mod;
+    int temp2 = (2 * (long)(h1 % mod) * (h2 % mod)) % mod;
+    int ans = (temp1 + temp2) % mod;
+    arr[n] = ans;
+    return ans;
+}
+
+//! user code
 int balancedBTs(int n)
 {
-    // Write your code here
+    int *arr = new int[n + 1];
+    for (int i = 0; i < n + 1; i++)
+    {
+        arr[i] = -1;
+    }
+
+    return balancedBTs(n, arr);
+    delete[] arr;
 }
+
+// TODO: number of the balanced binary tree of height h (Dp)
+
+int BalancedBTsDP(int n)
+{
+    int mod = (int)1e10 + 7;
+    int *arr = new int[n + 1];
+    arr[0] = 1;
+    arr[1] = 1;
+    for (int i = 2; i <= n; i++)
+    {
+        int temp1 = ((arr[i - 1] % mod) * (long)(arr[i - 1] % mod)) % mod;
+        int temp2 = (2 * (long)(arr[i - 2] % mod) * (arr[i - 1] % mod)) % mod;
+        arr[i] = (temp1 + temp2) % mod;
+    }
+
+    return arr[n];
+}
+
 int main()
 {
     // int ans = countMinStepsToOne(9);
     // int ans = countStepsToOne(9);
     // long ans = staircase(4);
-    int ans = minCount(4);
+    // int ans = minCount(4);
+    // int ans = balancedBTs(4);
+    int ans = BalancedBTsDP(6);
 
     cout << ans;
 
